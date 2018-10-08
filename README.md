@@ -1,17 +1,17 @@
-# English Language Server
+# Prose Language Server
 A Language server for LanguageTool and write-good
 
 ## Installation
 
 ```shell
-$ npm install -g xtaniguchimasaya/english-language-server
+$ npm install -g xtaniguchimasaya/prose-language-server
 ```
 
 ## Usage
 
 ```shell
-$ english-language-server --stdio --languagetool /path/to/languagetool-commandline.jar
-$ english-language-server --socket=4567 --languagetool /path/to/languagetool-commandline.jar
+$ prose-language-server --stdio --languagetool /path/to/languagetool-commandline.jar
+$ prose-language-server --socket=4567 --languagetool /path/to/languagetool-commandline.jar
 ```
 
 ### Emacs
@@ -19,7 +19,7 @@ $ english-language-server --socket=4567 --languagetool /path/to/languagetool-com
 For `eglot`, append your `init.el` or `.emacs`
 
 ```emacs-lisp
-(add-to-list eglot-server-program `(text-mode . ("english-language-server" "--stdio" "--languagetool" ,(expand-file-name "~/.emacs.d/LanguageTool-4.3/languagetool-commandline.jar"))))
+(add-to-list eglot-server-program `(text-mode . ("prose-language-server" "--stdio" "--languagetool" ,(expand-file-name "~/.emacs.d/LanguageTool-4.3/languagetool-commandline.jar"))))
 ```
 
 and type the following commands

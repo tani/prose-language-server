@@ -1,5 +1,5 @@
 {
-  "name": "english-language-server",
+  "name": "prosse-language-server",
   "version": "0.1.0",
   "description": "A language server for LanguageTool and write-good",
   "main": "index.js",
@@ -11,19 +11,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xtaniguchimasaya/english-language-server.git"
+    "url": "git+https://github.com/xtaniguchimasaya/prosse-language-server.git"
   },
   "keywords": [
     "language-server",
-    "english",
+    "prosse",
     "prose"
   ],
   "author": "TANIGUCHI Masaya",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/xtaniguchimasaya/english-language-server/issues"
+    "url": "https://github.com/xtaniguchimasaya/prosse-language-server/issues"
   },
-  "homepage": "https://github.com/xtaniguchimasaya/english-language-server#readme",
+  "homepage": "https://github.com/xtaniguchimasaya/prosse-language-server#readme",
   "dependencies": {
     "@types/node": "^10.11.4",
     "child-process-promise": "^2.2.1",
@@ -35,6 +35,6 @@
     "typescript": "^3.1.1"
   },
   "bin": {
-    "english-language-server": "index.js"
+    "prosse-language-server": "index.js"
   }
 }
