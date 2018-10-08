@@ -4,7 +4,7 @@ A Language server for LanguageTool and write-good
 ## Installation
 
 ```shell
-$ npm install english-language-server --global
+$ npm install -g xtaniguchimasaya/english-language-server
 ```
 
 ## Usage
