@@ -1,0 +1,38 @@
+{
+  "name": "english-language-server",
+  "version": "0.1.0",
+  "description": "A language server for LanguageTool and write-good",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "clean": "rm *~",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xtaniguchimasaya/english-language-server.git"
+  },
+  "keywords": [
+    "language-server",
+    "english",
+    "prose"
+  ],
+  "author": "TANIGUCHI Masaya",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/xtaniguchimasaya/english-language-server/issues"
+  },
+  "homepage": "https://github.com/xtaniguchimasaya/english-language-server#readme",
+  "dependencies": {
+    "@types/node": "^10.11.4",
+    "vscode-languageserver": "^5.1.0",
+    "write-good": "^0.13.1"
+  },
+  "devDependencies": {
+    "typescript": "^3.1.1"
+  },
+  "bin": {
+    "english-language-server": "index.js"
+  }
+}
