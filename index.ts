@@ -1,11 +1,11 @@
+#!/usr/bin/env node
+// -*- mode: typescript -*-
 import { createConnection, TextDocuments, TextDocument, Diagnostic, DiagnosticSeverity, ProposedFeatures } from "vscode-languageserver";
-import { readFile, appendFileSync } from "fs";
-import { promisify } from "util";
-const WriteGood: (text: string) => {
-    reason: string,
-    index: number,
-    offset: number
-}[] = require("write-good");
+const { exec } = require("child-process-promise");
+const FileUriToPath = require('file-uri-to-path');
+const WriteGood = require("write-good");
+
+const languagetoolCommandline = process.argv[process.argv.indexOf("--languagetool")+1];
 
 const connection = createConnection(ProposedFeatures.all);
 
@@ -18,9 +18,10 @@ connection.onInitialize(() => ({
 }));
 
 documents.onDidChangeContent(async (change) => {
-    const text = change.document.getText();
-    const suggestions = WriteGood(text);
-    const diagnostics: Diagnostic[] = suggestions.map(warning=>({
+    const warnings = WriteGood(change.document.getText());
+    const result = await exec(`java -jar ${languagetoolCommandline} --json ${FileUriToPath(change.document.uri)}`);
+    const errors = JSON.parse(result.stdout).matches;
+    const diagnostics: Diagnostic[] = [].concat(warnings.map((warning: any)=>({
 	severity: DiagnosticSeverity.Hint,
 	code: change.document.getText().slice(warning.index, warning.index+warning.offset),
 	range: {
@@ -29,7 +30,17 @@ documents.onDidChangeContent(async (change) => {
 	},
 	message: warning.reason,
 	srouce: "write-good"
-    }));
+    })), errors.map((error: any)=>({
+	severity: DiagnosticSeverity.Error,
+	code: change.document.getText().slice(error.offset, error.offset+error.length),
+	range: {
+	    start: change.document.positionAt(error.offset),
+	    end: change.document.positionAt(error.offset+error.length)
+	},
+	message: error.message,
+	source: "LanguageTool"
+    })));
+    
     connection.sendDiagnostics({ uri: change.document.uri, diagnostics });
 });
 			
