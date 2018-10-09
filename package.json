@@ -1,5 +1,5 @@
 {
-  "name": "prosse-language-server",
+  "name": "prose-language-server",
   "version": "0.1.0",
   "description": "A language server for LanguageTool and write-good",
   "main": "index.js",
