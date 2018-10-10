@@ -4,7 +4,7 @@
   "description": "A language server for LanguageTool and write-good",
   "main": "index.js",
   "scripts": {
-    "prebuild": "[ ! -e LanguageTool-4.3/languagetool-server.jar ] && curl -O https://www.languagetool.org/download/LanguageTool-4.3.zip && unzip LanguageTool-4.3.zip || :",
+    "postinstall": "[ ! -e LanguageTool-4.3/languagetool-server.jar ] && curl -O https://www.languagetool.org/download/LanguageTool-4.3.zip && unzip LanguageTool-4.3.zip && rm LanguageTool-4.3.zip || :",
     "build": "tsc",
     "watch": "tsc -w",
     "clean": "rm *~",
