@@ -4,6 +4,7 @@
   "description": "A language server for LanguageTool and write-good",
   "main": "index.js",
   "scripts": {
+    "prebuild": "[ ! -e LanguageTool-4.3/languagetool-server.jar ] && curl -O https://www.languagetool.org/download/LanguageTool-4.3.zip && unzip LanguageTool-4.3.zip || :",
     "build": "tsc",
     "watch": "tsc -w",
     "clean": "rm *~",
@@ -25,8 +26,14 @@
   "homepage": "https://github.com/xtaniguchimasaya/prose-language-server#readme",
   "dependencies": {
     "@types/node": "^10.11.4",
+    "@types/node-fetch": "^2.1.2",
+    "@types/qs": "^6.5.1",
     "child-process-promise": "^2.2.1",
     "file-uri-to-path": "^1.0.0",
+    "get-port": "^4.0.0",
+    "node-fetch": "^2.2.0",
+    "qs": "^6.5.2",
+    "spellchecker": "^3.5.0",
     "vscode-languageserver": "^5.1.0",
     "write-good": "^0.13.1"
   },
