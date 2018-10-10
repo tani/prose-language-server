@@ -81,7 +81,7 @@ const validateTextDocumentChange = async (change: TextDocumentChangeEvent) => {
 
 documents.onDidChangeContent(validateTextDocumentChange);
 
-languageToolServer.listen(getPort());
+(async()=>{languageToolServer.listen(await getPort());})();
 
 documents.listen(connection);
 
