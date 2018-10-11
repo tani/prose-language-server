@@ -1,0 +1,16 @@
+sudo: false
+language: node_js
+node_js:
+  - 10
+cache:
+  directories:
+    - "$HOME/.npm"
+script:
+  - npm run build
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  on:
+    branch: master
+  target-branch: release
