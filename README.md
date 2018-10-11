@@ -4,7 +4,7 @@ A Language server for LanguageTool and write-good
 ## Installation
 
 ```shell
-$ npm install -g xtaniguchimasaya/prose-language-server#release
+$ npm install -g xtaniguchimasaya/prose-language-server
 ```
 
 Prose language server uses Windows and macOS native spell-check API.

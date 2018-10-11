@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-// -*- mode: typescript -*-
 import { createConnection, TextDocuments, TextDocument, TextDocumentChangeEvent, Diagnostic, DiagnosticSeverity, ProposedFeatures } from "vscode-languageserver";
 import { exec, spawn } from "child_process";
 import fetch from "node-fetch";

@@ -7,10 +7,3 @@ cache:
     - "$HOME/.npm"
 script:
   - npm run build
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  on:
-    branch: master
-  target-branch: release
