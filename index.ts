@@ -41,8 +41,18 @@ connection.onInitialize(() => ({
     }
 }));
 
+const removeMarkdown = (markdown: string) => {
+    return markdown
+	.replace(/```[\s\S]*?```/mg, (s) => " ".repeat(s.length))
+    	.replace(/~~~[\s\S]*?~~~/mg, (s) => " ".repeat(s.length))
+        .replace(/\$\$?[\s\S]*?\$\$?/mg, (s) => " ".repeat(s.length))
+	.replace(/(\[)(.*?)(\]\(.*?\))/mg, (_, s, t, u) => " ".repeat(s.length)+t+" ".repeat(u.length))
+        .replace(/[-=>`*_ ]*/mg, (s)=>" ".repeat(s.length))
+	.replace(/#*/mg, (s)=>" ".repeat(s.length))
+}
+
 const validateTextDocumentChange = async (change: TextDocumentChangeEvent) => {
-    const text = change.document.getText();
+    const text = process.argv.indexOf("--markdown") > 0 ? removeMarkdown(change.document.getText()) : change.document.getText();
     const writeGoodWarnings = process.argv.indexOf("--style") > 0 ? writeGood(text) : [];
     const spellCheckerErrors = process.argv.indexOf("--spelling") > 0 ? await checkSpellingAsync(text) : [];
     const languageToolErrors = process.argv.indexOf("--grammar") > 0 ? await languageToolClient(text) : [];
@@ -65,7 +75,9 @@ const validateTextDocumentChange = async (change: TextDocumentChangeEvent) => {
 	    },
 	    message: `${text.slice(error.start, error.end)} is misspelled.`,
 	    source: "spellchecker",
-	})), languageToolErrors.map((error: any)=>({
+	})), languageToolErrors.filter((error: any) => {
+	    return !error.message.match(/repeated a whitespace/)
+	}).map((error: any)=>({
 	    severity: DiagnosticSeverity.Error,
 	    code: text.slice(error.offset, error.offset+error.length),
 	    range: {
