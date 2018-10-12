@@ -34,7 +34,6 @@
     "get-port": "^4.0.0",
     "node-fetch": "^2.2.0",
     "qs": "^6.5.2",
-    "spellchecker": "^3.5.0",
     "vscode-languageserver": "^5.1.0",
     "write-good": "^0.13.1"
   },

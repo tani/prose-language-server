@@ -5,7 +5,6 @@ import qs from "qs";
 const getPort = require("get-port")
 const fileUrlToPath = require("file-uri-to-path");
 const writeGood = require("write-good");
-const { checkSpellingAsync } = require("spellchecker");
 let languageToolClient = async (text: string) => ([] as any[]);
 
 const languageToolServer = {
@@ -51,9 +50,8 @@ const removeMarkdown = (markdown: string) => {
 
 const validateTextDocumentChange = async (change: TextDocumentChangeEvent) => {
     const text = process.argv.indexOf("--markdown") > 0 ? removeMarkdown(change.document.getText()) : change.document.getText();
-    const writeGoodWarnings = process.argv.indexOf("--style") > 0 ? writeGood(text) : [];
-    const spellCheckerErrors = process.argv.indexOf("--spelling") > 0 ? await checkSpellingAsync(text) : [];
-    const languageToolErrors = process.argv.indexOf("--grammar") > 0 ? await languageToolClient(text) : [];
+    const writeGoodWarnings = await writeGood(text);
+    const languageToolErrors = await languageToolClient(text);
     const diagnostics: Diagnostic[] = ([] as Diagnostic[])
 	.concat(writeGoodWarnings.map((warning: any)=>({
 	    severity: DiagnosticSeverity.Hint,
@@ -64,15 +62,6 @@ const validateTextDocumentChange = async (change: TextDocumentChangeEvent) => {
 	    },
 	    message: warning.reason,
 	    srouce: "write-good"
-	})), spellCheckerErrors.map((error: any)=>({
-	    severity: DiagnosticSeverity.Error,
-	    code: text.slice(error.start, error.end),
-	    range: {
-		start: change.document.positionAt(error.start),
-		end: change.document.positionAt(error.end)
-	    },
-	    message: `${text.slice(error.start, error.end)} is misspelled.`,
-	    source: "spellchecker",
 	})), languageToolErrors.filter((error: any) => {
 	    return !error.message.match(/repeated a whitespace/)
 	}).map((error: any)=>({

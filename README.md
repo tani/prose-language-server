@@ -7,14 +7,11 @@ A Language server for LanguageTool and write-good
 $ npm install -g xtaniguchimasaya/prose-language-server
 ```
 
-Prose language server uses Windows and macOS native spell-check API.
-For Linux, since it uses hunspell, you have to install it. For example `apt install hunspell hunspell-en-us`.
-
 ## Usage
 
 ```shell
-$ prose-language-server --stdio --style --grammar --spelling
-$ prose-language-server --socket=4567 --style --grammar --spelling
+$ prose-language-server --stdio
+$ prose-language-server --socket=4567
 ```
 
 ### Emacs
@@ -22,6 +19,6 @@ $ prose-language-server --socket=4567 --style --grammar --spelling
 For `eglot`, append your `init.el` or `.emacs`
 
 ```emacs-lisp
-(add-to-list 'eglot-server-program `(text-mode . ("prose-language-server" "--stdio" "--style" "--grammar" "--spelling")))
-(add-to-list 'eglot-server-program `(markdown-mode . ("prose-language-server" "--stdio" "--style" "--grammar" "--spelling" "--markdown")))
+(add-to-list 'eglot-server-program `(text-mode . ("prose-language-server" "--stdio")))
+(add-to-list 'eglot-server-program `(markdown-mode . ("prose-language-server" "--stdio" "--markdown")))
 ```
