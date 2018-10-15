@@ -5,8 +5,6 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "[ ! -e LanguageTool-4.3/languagetool-server.jar ] && curl -O https://www.languagetool.org/download/LanguageTool-4.3.zip && unzip LanguageTool-4.3.zip && rm LanguageTool-4.3.zip || :",
-    "build": "tsc",
-    "watch": "tsc -w",
     "clean": "rm *~",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,10 +23,6 @@
   },
   "homepage": "https://github.com/xtaniguchimasaya/prose-language-server#readme",
   "dependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0",
-    "@babel/preset-typescript": "^7.1.0",
-    "@babel/register": "^7.0.0",
     "child-process-promise": "^2.2.1",
     "file-uri-to-path": "^1.0.0",
     "get-port": "^4.0.0",
@@ -37,13 +31,7 @@
     "vscode-languageserver": "^5.1.0",
     "write-good": "^0.13.1"
   },
-  "devDependencies": {
-    "@types/node": "^10.11.4",
-    "@types/node-fetch": "^2.1.2",
-    "@types/qs": "^6.5.1",
-    "typescript": "^3.1.1"
-  },
   "bin": {
-    "prose-language-server": "cli.js"
+    "prose-language-server": "index.js"
   }
 }
