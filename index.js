@@ -49,8 +49,19 @@ const removeMarkdown = (markdown) => {
 	.replace(/#*/mg, (s)=>" ".repeat(s.length))
 }
 
+const removeLaTeX = (latex) => {
+    return latex
+	.replace(/(\\text.*\{)(.*?)(\})/, (_, s, t, u)=> " ".repeat(s.length)+t+" ".repeat(u.length))
+	.replace(/\\\w+(?:\{.*?\}|\[.*?\])*/mg, (s) => " ".repeat(s.length))
+	.replace(/\\\(.*?\\\)|\\\[.*?\\\]/mg, (s) => " ".repeat(s.length))
+	.replace(/\$\$.*?\$\$/mg, (s) => " ".repeat(s.length))
+	.replace(/\$.*?\$/mg, (s) => " ".repeat(s.length))
+}
+
 const validateTextDocumentChange = async (change) => {
-    const text = process.argv.indexOf("--markdown") > 0 ? removeMarkdown(change.document.getText()) : change.document.getText();
+    const text = process.argv.indexOf("--markdown") > 0 ? removeMarkdown(change.document.getText())
+	  : process.argv.indexOf("--latex") > 0 ? removeLaTeX(change.document.getText())
+	  : change.document.getText();
     const writeGoodWarnings = await writeGood(text);
     const languageToolErrors = await languageToolClient(text);
     const diagnostics = ([])
