@@ -21,4 +21,5 @@ For `eglot`, append your `init.el` or `.emacs`
 ```emacs-lisp
 (add-to-list 'eglot-server-program `(text-mode . ("prose-language-server" "--stdio")))
 (add-to-list 'eglot-server-program `(markdown-mode . ("prose-language-server" "--stdio" "--markdown")))
+(add-to-list 'eglot-server-program `(LaTeX-mode . ("prose-language-server" "--stdio" "--latex")))
 ```
