@@ -16,7 +16,7 @@ $ prose-language-server --socket=4567
 
 ### Emacs
 
-For `eglot`, append your `init.el` or `.emacs`
+For `eglot`, append this to your `init.el` or `.emacs` files.
 
 ```emacs-lisp
 (add-to-list 'eglot-server-program `(text-mode . ("prose-language-server" "--stdio")))
