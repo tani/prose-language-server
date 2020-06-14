@@ -4,7 +4,7 @@ A Language server for LanguageTool and write-good
 ## Installation
 
 ```shell
-$ npm install -g xtaniguchimasaya/prose-language-server
+$ npm install -g nzt/prose-language-server
 ```
 
 ## Usage
