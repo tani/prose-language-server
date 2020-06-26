@@ -4,7 +4,7 @@ A Language server for LanguageTool and write-good
 ## Installation
 
 ```shell
-$ npm install -g nzt/prose-language-server
+$ npm install -g tani/prose-language-server
 ```
 
 ## Usage
